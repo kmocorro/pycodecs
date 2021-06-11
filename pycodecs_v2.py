@@ -6,8 +6,9 @@ status_list = [None,None]
 times = []
 burst = [ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" ]
 
-#video = cv2.VideoCapture(0 + cv2.CAP_DSHOW())
-video = cv2.VideoCapture(0)
+# For third party Camera USB
+#video = cv2.VideoCapture(1 + cv2.CAP_DSHOW())
+video = cv2.VideoCapture(1)
 
 while True:
   
@@ -33,20 +34,6 @@ while True:
     # wait
     time.sleep(0.4)
 
-    # check
-    if hour < 5:
-      time.sleep(60)
-      continue
-        
-    if hour > 7 & hour < 17:
-      time.sleep(60)
-      continue
-        
-    if hour > 19:
-      time.sleep(60)
-      continue
-      
-
     for contour in cnts:
       if cv2.contourArea(contour) < 20000:
           continue
@@ -63,6 +50,19 @@ while True:
     if status_list[-1] == 1 and status_list[-2] == 0:
         times.append(datetime.now())
 
+        # check
+        if hour < 5:
+          time.sleep(10)
+          continue
+            
+      #  if hour > 7 & hour < 17:
+      #    time.sleep(10)
+      #    continue
+            
+        if hour > 19:
+          time.sleep(10)
+          continue
+          
         # burst
         for x in burst:
           
